@@ -4,12 +4,15 @@ package test.dahun.mobileplay.tab;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -28,11 +32,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.dahun.mobileplay.R;
 import test.dahun.mobileplay.adapter.MusicCustomPagerAdapter;
+import test.dahun.mobileplay.adapter.ViewPagerAdapter;
+import test.dahun.mobileplay.model.Fan;
 import test.dahun.mobileplay.ui.VerticalViewPager;
 
 /**
@@ -41,7 +48,15 @@ import test.dahun.mobileplay.ui.VerticalViewPager;
 
 public class MusicFragment extends Fragment
 {
-    @BindView(R.id.titleLayout) RelativeLayout titleLayout;
+    @BindView(R.id.navi) ImageButton navibtn;
+    @BindView(R.id.mn_play) ImageButton playbtn;
+    @BindView(R.id.mn_movie) ImageButton moviebtn;
+    @BindView(R.id.mn_gallery) ImageButton galbtn;
+    @BindView(R.id.mn_comm) ImageButton commbtn;
+    @BindView(R.id.ic_mn)
+    ImageView btn;
+
+    @BindView(R.id.titleLayout) ImageView titleLayout;
     @BindView(R.id.ic_homeBtn) Button ic_homeBtn;
     @BindView(R.id.ic_equalizerBtn) Button ic_equalizerBtn;
 
@@ -52,10 +67,11 @@ public class MusicFragment extends Fragment
     @BindView(R.id.currentTime) TextView currentTime;
     @BindView(R.id.maxTime) TextView maxTime;
     @BindView(R.id.musicProgress) SeekBar seekBar; // 음악 재생위치를 나타내는 시크바
-    @BindView(R.id.navi) ImageButton navibtn;
+    @BindView(R.id.musictitle) TextView musictitle;//음악 제목
 
     @BindView(R.id.play_lyrics) Button lyricsBtn;
     @BindView(R.id.play_list) Button playlistBtn;
+
 
 
 
@@ -87,6 +103,10 @@ public class MusicFragment extends Fragment
     TextView music6;
     TextView music7;
 
+
+    //노래 제목 리스트
+
+    ArrayList<String> musicarr = new ArrayList<>();
 
     class MusicThread extends Thread {
         @Override
@@ -153,8 +173,151 @@ public class MusicFragment extends Fragment
         return layout;
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void initSetting() {
+
+        musicarr.add("새 신발");
+        musicarr.add("ZeZe");
+        musicarr.add("스물");
+        musicarr.add("푸르던");
+        musicarr.add("Red Queen(Feat. Zion.T)");
+        musicarr.add("무릎");
+        musicarr.add("안경");
+
+        //homebtn
+        ic_homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPagerAdapter.setViewPagerTabListener.setTab(0);
+            }
+        });
+        //
+
+
+        //navibutton
+        ViewGroup.LayoutParams params = navibtn.getLayoutParams();
+        params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+        params.height =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+        navibtn.requestLayout();
+        navibtn.setImageResource(R.drawable.mn_default);
+        navibtn.setTag(R.drawable.mn_default);
+
+        navibtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if((Integer)view.getTag() == R.drawable.mn_default){
+                    playbtn.setVisibility(View.VISIBLE);
+                    moviebtn.setVisibility(View.VISIBLE);
+                    galbtn.setVisibility(View.VISIBLE);
+                    commbtn.setVisibility(View.VISIBLE);
+                    btn.setVisibility(View.VISIBLE);
+
+                    ViewGroup.LayoutParams params = navibtn.getLayoutParams();
+                    params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                    params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 170, getResources().getDisplayMetrics());
+                    navibtn.requestLayout();
+                    navibtn.setImageResource(R.drawable.mn_click);
+                    navibtn.setTag(R.drawable.mn_click);
+                }else{
+                    playbtn.setVisibility(View.GONE);
+                    moviebtn.setVisibility(View.GONE);
+                    galbtn.setVisibility(View.GONE);
+                    commbtn.setVisibility(View.GONE);
+                    btn.setVisibility(View.GONE);
+                    ViewGroup.LayoutParams params = navibtn.getLayoutParams();
+                    params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+                    params.height =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+                    navibtn.requestLayout();
+                    navibtn.setImageResource(R.drawable.mn_default);
+                    navibtn.setTag(R.drawable.mn_default);
+                }
+            }
+        });
+
+        playbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playbtn.setVisibility(View.GONE);
+                moviebtn.setVisibility(View.GONE);
+                galbtn.setVisibility(View.GONE);
+                commbtn.setVisibility(View.GONE);
+                btn.setVisibility(View.GONE);
+
+                ViewGroup.LayoutParams params = navibtn.getLayoutParams();
+                params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+                params.height =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+                navibtn.requestLayout();
+                navibtn.setImageResource(R.drawable.mn_default);
+                navibtn.setTag(R.drawable.mn_default);
+                ViewPagerAdapter.setViewPagerTabListener.setTab(1);
+                //Toast.makeText(getContext(), "music", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        moviebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playbtn.setVisibility(View.GONE);
+                moviebtn.setVisibility(View.GONE);
+                galbtn.setVisibility(View.GONE);
+                commbtn.setVisibility(View.GONE);
+                btn.setVisibility(View.GONE);
+
+                ViewGroup.LayoutParams params = navibtn.getLayoutParams();
+                params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+                params.height =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+                navibtn.requestLayout();
+                navibtn.setImageResource(R.drawable.mn_default);
+                navibtn.setTag(R.drawable.mn_default);
+                ViewPagerAdapter.setViewPagerTabListener.setTab(2);
+                //      Toast.makeText(getContext(), " movie", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        galbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playbtn.setVisibility(View.GONE);
+                moviebtn.setVisibility(View.GONE);
+                galbtn.setVisibility(View.GONE);
+                commbtn.setVisibility(View.GONE);
+                btn.setVisibility(View.GONE);
+
+                ViewGroup.LayoutParams params = navibtn.getLayoutParams();
+                params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+                params.height =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+                navibtn.requestLayout();
+                navibtn.setImageResource(R.drawable.mn_default);
+                navibtn.setTag(R.drawable.mn_default);
+                ViewPagerAdapter.setViewPagerTabListener.setTab(3);
+                //          Toast.makeText(getContext(), "gallery", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        commbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playbtn.setVisibility(View.GONE);
+                moviebtn.setVisibility(View.GONE);
+                galbtn.setVisibility(View.GONE);
+                commbtn.setVisibility(View.GONE);
+                btn.setVisibility(View.GONE);
+
+                ViewGroup.LayoutParams params = navibtn.getLayoutParams();
+                params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
+                params.height =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+                navibtn.requestLayout();
+                navibtn.setImageResource(R.drawable.mn_default);
+                navibtn.setTag(R.drawable.mn_default);
+                ViewPagerAdapter.setViewPagerTabListener.setTab(4);
+                //          Toast.makeText(getContext(), "community", Toast.LENGTH_LONG).show();
+
+            }
+        });
+/////
+
 
         musicPager.setAdapter(new MusicCustomPagerAdapter(getContext()));
         musicPager.setOnPageChangeListener(new VerticalViewPager.OnPageChangeListener() {
@@ -169,6 +332,8 @@ public class MusicFragment extends Fragment
                 time=0;
                 index=position;
 
+                //노래제목
+                musictitle.setText(musicarr.get(position));
                 changeMusic(position);
                 changeLyrics(position);
             }

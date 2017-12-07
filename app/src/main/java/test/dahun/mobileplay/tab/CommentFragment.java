@@ -52,6 +52,9 @@ import static test.dahun.mobileplay.R.drawable.comm_profileimg;
 public class CommentFragment extends Fragment
 {
 
+    @BindView(R.id.ic_homeBtn)
+    Button ic_homeBtn;
+
     @BindView(R.id.navi) ImageButton navibtn;
     @BindView(R.id.mn_play) ImageButton playbtn;
     @BindView(R.id.mn_movie) ImageButton moviebtn;
@@ -103,6 +106,16 @@ public class CommentFragment extends Fragment
     //navibutton
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         public void initSetting() {
+
+        //homebtn
+        ic_homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPagerAdapter.setViewPagerTabListener.setTab(0);
+            }
+        });
+        //
+
         ViewGroup.LayoutParams params = navibtn.getLayoutParams();
         params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
         params.height =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());

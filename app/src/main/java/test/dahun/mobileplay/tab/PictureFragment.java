@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +43,8 @@ import test.dahun.mobileplay.ui.VerticalViewPager;
 public class PictureFragment extends Fragment
 {
 
+    @BindView(R.id.ic_homeBtn)
+    Button ic_homeBtn;
     @BindView(R.id.navi)
     ImageButton navibtn;
     @BindView(R.id.mn_play) ImageButton playbtn;
@@ -78,6 +81,15 @@ public class PictureFragment extends Fragment
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
     public void initSetting() {
+        //homebtn
+        ic_homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPagerAdapter.setViewPagerTabListener.setTab(0);
+            }
+        });
+        //
+
         //navibutton
             ViewGroup.LayoutParams params = navibtn.getLayoutParams();
             params.width =(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
