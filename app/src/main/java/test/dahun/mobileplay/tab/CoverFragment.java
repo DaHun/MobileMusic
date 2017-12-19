@@ -30,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.dahun.mobileplay.R;
 import test.dahun.mobileplay.adapter.CoverCustomPagerAdapter;
+import test.dahun.mobileplay.adapter.ViewPagerAdapter;
 import test.dahun.mobileplay.ui.VerticalViewPager;
 
 /**
@@ -85,6 +86,13 @@ public class CoverFragment extends Fragment
        // mainImage.setImageResource(R.drawable.main_1_bg);
         ic_equalizerBtn.setBackgroundResource(R.drawable.ic_equalizer);
 
+        //equalbtn
+        ic_equalizerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPagerAdapter.setViewPagerTabListener.setTab(1);
+            }
+        });
         //
         String txt ="한 떨기 스물셋 아이유의 사소한 현재. 그리고 당신의 지금.\n" +
                 "아이유 네 번재 미니앨범 [CHAT-SHIRE] 발매!\n" +

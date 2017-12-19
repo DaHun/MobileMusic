@@ -45,6 +45,8 @@ public class PictureFragment extends Fragment
 
     @BindView(R.id.ic_homeBtn)
     Button ic_homeBtn;
+    @BindView(R.id.ic_equalizerBtn) Button equalbtn;
+
     @BindView(R.id.navi)
     ImageButton navibtn;
     @BindView(R.id.mn_play) ImageButton playbtn;
@@ -89,6 +91,13 @@ public class PictureFragment extends Fragment
             }
         });
         //
+        //equalbtn
+        equalbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewPagerAdapter.setViewPagerTabListener.setTab(1);
+            }
+        });
 
         //navibutton
             ViewGroup.LayoutParams params = navibtn.getLayoutParams();
