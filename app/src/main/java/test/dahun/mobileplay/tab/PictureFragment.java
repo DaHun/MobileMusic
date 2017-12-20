@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -63,6 +64,12 @@ public class PictureFragment extends Fragment
 
     final String TAG="PictureFragment";
     LinearLayout layout;
+
+    boolean IDLE=false;
+    boolean DRAGGING=false;
+    boolean SETTING=false;
+    int beforeDy=0;
+    int afterDy=0;
 
     public PictureFragment() {
         super();
@@ -222,16 +229,21 @@ public class PictureFragment extends Fragment
                 }
             });
 /////
-        CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.VERTICAL);
+        final CarouselLayoutManager layoutManager = new CarouselLayoutManager(CarouselLayoutManager.VERTICAL);
         layoutManager.setPostLayoutListener(new CarouselZoomPostLayoutListener());
-        PictureRecyclerViewAdapter pictureRecyclerViewAdapter=new PictureRecyclerViewAdapter(getContext());
+        final PictureRecyclerViewAdapter pictureRecyclerViewAdapter=new PictureRecyclerViewAdapter(getContext());
         pictureRecyclerView.setAdapter(pictureRecyclerViewAdapter);
         pictureRecyclerView.setLayoutManager(layoutManager);
         pictureRecyclerView.setHasFixedSize(true);
         pictureRecyclerView.addOnScrollListener(new CenterScrollListener());
 
+        layoutManager.addOnItemSelectionListener(new CarouselLayoutManager.OnCenterItemSelectionListener() {
+            @Override
+            public void onCenterItemChanged(int adapterPosition) {
+                imgnum.setText(String.valueOf(adapterPosition+1));
+            }
+        });
 
-        //
         totalimgnum.setText(Integer.toString(pictureRecyclerViewAdapter.getItemCount()));
 
     }
