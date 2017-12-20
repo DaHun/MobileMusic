@@ -376,7 +376,17 @@ public class MusicFragment extends Fragment
                 }
 
                 isPlaying = false;
-                mp.pause();
+
+                if(!mp.isPlaying()){
+
+                    mp.setLooping(false); // true:무한반복
+                    seekBar.setMax(total);// 씨크바의 최대 범위를 노래의 재생시간으로 설정
+
+                    new MusicThread().start(); // 씨크바 그려줄 쓰레드 시작
+                    
+                }else
+                    mp.pause();
+
             }
             public void onProgressChanged(SeekBar seekBar,int progress,boolean fromUser) {
 
