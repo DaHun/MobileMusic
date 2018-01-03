@@ -72,7 +72,7 @@ public class MusicFragment extends Fragment
     @BindView(R.id.play_lyrics) Button lyricsBtn;
     @BindView(R.id.play_list) Button playlistBtn;
 
-
+    @BindView(R.id.play_mode) Button playmodeBtn;
 
 
     final String TAG="MusicFragment";
@@ -168,7 +168,7 @@ public class MusicFragment extends Fragment
         initSetting();
         lyrics_popupSetting();
         songlist_popupSetting();
-
+        playmode();
 
         return layout;
     }
@@ -823,6 +823,28 @@ public class MusicFragment extends Fragment
             Log.d("SetUserHint","Music ON");
         else
             Log.d("SetUserHint","Music OFF");
+
+    }
+
+    public void playmode(){
+
+        playmodeBtn.setTag(R.drawable.play_ic_random);
+
+        playmodeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if((Integer)view.getTag()==R.drawable.play_ic_random){
+                    playmodeBtn.setBackgroundResource(R.drawable.play_ic_repeat);
+                    playmodeBtn.setTag(R.drawable.play_ic_repeat);
+                }else if((Integer)view.getTag()==R.drawable.play_ic_repeat){
+                    playmodeBtn.setBackgroundResource(R.drawable.play_ic_repeatone);
+                    playmodeBtn.setTag(R.drawable.play_ic_repeatone);
+                }else if((Integer)view.getTag()==R.drawable.play_ic_repeatone){
+                    playmodeBtn.setBackgroundResource(R.drawable.play_ic_random);
+                    playmodeBtn.setTag(R.drawable.play_ic_random);
+                }
+            }
+        });
 
     }
 

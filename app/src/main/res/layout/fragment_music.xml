@@ -55,7 +55,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="60dp"
-                android:id="@+id/paly_mode"
+                android:id="@+id/play_mode"
                 android:background="@drawable/play_ic_random"/>
             <Button
                 android:layout_width="40dp"

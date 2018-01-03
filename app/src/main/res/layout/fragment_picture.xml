@@ -35,46 +35,55 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:background="#ffffff"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.8">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/pictureRecyclerView"
-            android:layout_centerInParent="true"
-            android:layout_width="300dp"
-            android:layout_height="300dp">
-        </android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#fff"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:id="@+id/num"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:text="/"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/pictureRecyclerView"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="450dp">
+            </android.support.v7.widget.RecyclerView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#fff"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#bdbdbd"
+                    android:textSize="17dp"
+                    android:id="@+id/num"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#bdbdbd"
+                    android:textSize="17dp"
 
-            android:id="@+id/totalnum"/>
-    </LinearLayout>
+                    android:text="/"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#bdbdbd"
+                    android:textSize="17dp"
+
+                    android:id="@+id/totalnum"/>
+            </LinearLayout>
+        </LinearLayout>
+
     <RelativeLayout
-        android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
         <!--Navi-->
         <!--Navi-->
         <RelativeLayout
@@ -142,7 +151,7 @@
         </RelativeLayout>
         <!---->
     </RelativeLayout>
-
+</FrameLayout>
 
 
 
