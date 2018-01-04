@@ -49,7 +49,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="450dp">
+                android:layout_height="330dp">
             </android.support.v7.widget.RecyclerView>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,10 +81,6 @@
             </LinearLayout>
         </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--Navi-->
         <!--Navi-->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -100,13 +96,17 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/mn_default" />
 
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/mn_play"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="114dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/mn_click_ic_play"
                 android:visibility="gone" />
 
@@ -114,8 +114,9 @@
                 android:id="@+id/mn_movie"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_above="@+id/mn_play"
-                android:layout_toEndOf="@+id/mn_play"
+                android:layout_marginBottom="40dp"
+                android:layout_gravity="bottom"
+
                 android:background="@drawable/mn_click_ic_movie"
                 android:visibility="gone" />
 
@@ -123,10 +124,9 @@
                 android:id="@+id/mn_gallery"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_alignTop="@+id/mn_movie"
-                android:layout_marginStart="31dp"
-                android:layout_marginTop="11dp"
-                android:layout_toEndOf="@+id/mn_movie"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
                 android:background="@drawable/mn_click_ic_gallery"
                 android:visibility="gone" />
 
@@ -134,10 +134,10 @@
                 android:id="@+id/mn_comm"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/mn_gallery"
+                android:layout_gravity="bottom"
                 android:background="@drawable/mn_click_ic_community"
                 android:visibility="gone" />
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/ic_mn"
@@ -147,10 +147,8 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/mn_click_ic"
                 android:visibility="gone" />
-
         </RelativeLayout>
         <!---->
-    </RelativeLayout>
 </FrameLayout>
 
 
