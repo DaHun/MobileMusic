@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.google.android.gms:play-services-gcm-10.0.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/7207d31234081a0fd6d59d66ad559767/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/7207d31234081a0fd6d59d66ad559767/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/12bf63505887e74622f18fdc060a8353/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-gcm-10.0.1.aar/12bf63505887e74622f18fdc060a8353/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

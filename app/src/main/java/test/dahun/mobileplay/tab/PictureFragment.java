@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.azoft.carousellayoutmanager.CarouselLayoutManager;
 import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
 import com.azoft.carousellayoutmanager.CenterScrollListener;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import org.w3c.dom.Text;
 
@@ -35,6 +37,7 @@ import test.dahun.mobileplay.R;
 import test.dahun.mobileplay.adapter.PictureRecyclerViewAdapter;
 import test.dahun.mobileplay.adapter.ViewPagerAdapter;
 import test.dahun.mobileplay.main.MainActivity;
+import test.dahun.mobileplay.model.ApplicationStatus;
 import test.dahun.mobileplay.ui.VerticalViewPager;
 
 /**
@@ -46,7 +49,7 @@ public class PictureFragment extends Fragment
 
     @BindView(R.id.ic_homeBtn)
     Button ic_homeBtn;
-    @BindView(R.id.ic_equalizerBtn) Button equalbtn;
+    @BindView(R.id.ic_equalizerBtn) ImageView equalbtn;
 
     @BindView(R.id.navi)
     ImageButton navibtn;
@@ -97,8 +100,16 @@ public class PictureFragment extends Fragment
                 ViewPagerAdapter.setViewPagerTabListener.setTab(0);
             }
         });
-        //
-        //equalbtn
+
+        //equalizer
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(equalbtn);
+
+        if(ApplicationStatus.isPlaying)
+            Glide.with(getContext()).load(R.raw.ic_equalizer_start).into(imageViewTarget);
+        else
+            Glide.with(getContext()).load(R.drawable.ic_equalizer_stop).into(imageViewTarget);
+
+
         equalbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,8 +263,19 @@ public class PictureFragment extends Fragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser)
+        if(isVisibleToUser){
             Log.d("SetUserHint","Picture ON");
+
+            View view=layout;
+            if(view != null){
+                GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(equalbtn);
+
+                if(ApplicationStatus.isPlaying)
+                    Glide.with(getContext()).load(R.raw.ic_equalizer_start).into(imageViewTarget);
+                else
+                    Glide.with(getContext()).load(R.drawable.ic_equalizer_stop).into(imageViewTarget);
+            }
+        }
         else
             Log.d("SetUserHint","Picture OFF");
 

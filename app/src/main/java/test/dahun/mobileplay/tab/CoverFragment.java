@@ -6,31 +6,25 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.SlidingDrawer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.dahun.mobileplay.R;
 import test.dahun.mobileplay.adapter.CoverCustomPagerAdapter;
 import test.dahun.mobileplay.adapter.ViewPagerAdapter;
+import test.dahun.mobileplay.model.ApplicationStatus;
 import test.dahun.mobileplay.ui.VerticalViewPager;
 
 /**
@@ -43,7 +37,7 @@ public class CoverFragment extends Fragment
     @BindView(R.id.maingBottomImage) ImageView mainBottomImage;
     @BindView(R.id.cover_text) TextView maintext;
     @BindView(R.id.cover_top) ImageView mainTopImage;
-    @BindView(R.id.ic_equalizerBtn) Button ic_equalizerBtn;
+    @BindView(R.id.ic_equalizerBtn) ImageView ic_equalizerBtn;
 
 
     @BindView(R.id.coverpager)
@@ -55,7 +49,7 @@ public class CoverFragment extends Fragment
     boolean state= true;//커버
 
     final String TAG="CoverFragment";
-    LinearLayout layout;
+    LinearLayout layout=null;
 
     public CoverFragment() {
         super();
@@ -79,14 +73,18 @@ public class CoverFragment extends Fragment
     }
 
     public void initSetting() {
-       // Glide.with(getContext()).load(R.drawable.main_1_bg).into(mainImage);
+
         Glide.with(getContext()).load(R.drawable.bg_main_bottom).into(mainBottomImage);
         Glide.with(getContext()).load(R.drawable.main_3_info).into(mainTopImage);
 
-       // mainImage.setImageResource(R.drawable.main_1_bg);
-        ic_equalizerBtn.setBackgroundResource(R.drawable.ic_equalizer);
-
         //equalbtn
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(ic_equalizerBtn);
+
+        if(ApplicationStatus.isPlaying)
+            Glide.with(getContext()).load(R.raw.ic_equalizer_start).into(imageViewTarget);
+        else
+            Glide.with(getContext()).load(R.drawable.ic_equalizer_stop).into(imageViewTarget);
+
         ic_equalizerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,8 +126,19 @@ public class CoverFragment extends Fragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser)
+        if(isVisibleToUser){
             Log.d("SetUserHint","Cover ON");
+
+            View view=layout;
+            if(view != null){
+                GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(ic_equalizerBtn);
+
+                if(ApplicationStatus.isPlaying)
+                    Glide.with(getContext()).load(R.raw.ic_equalizer_start).into(imageViewTarget);
+                else
+                    Glide.with(getContext()).load(R.drawable.ic_equalizer_stop).into(imageViewTarget);
+            }
+        }
         else
             Log.d("SetUserHint","Cover OFF");
 
