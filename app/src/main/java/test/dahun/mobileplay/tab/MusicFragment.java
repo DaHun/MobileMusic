@@ -540,6 +540,12 @@ public class MusicFragment extends Fragment
 
                 //클릭시 팝업 윈도우 생성
                 popup = new PopupWindow(popupView, 1200, 1200, true);
+                //팝업 뷰 터치 되도록
+                popup.setTouchable(true);
+                //팝업 뷰 포커스도 주고
+                popup.setFocusable(true);
+                //팝업 뷰 이외에도 터치되게 (터치시 팝업 닫기 위한 코드)
+                popup.setOutsideTouchable(true);
 
                 RelativeLayout relativeLayout = (RelativeLayout)layout.findViewById(R.id.contentLayout);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
@@ -584,6 +590,12 @@ public class MusicFragment extends Fragment
                 //클릭시 팝업 윈도우 생성
                 popup = new PopupWindow(popupView, 1200, WindowManager.LayoutParams.WRAP_CONTENT, true);
                 //popup = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                //팝업 뷰 터치 되도록
+                popup.setTouchable(true);
+                //팝업 뷰 포커스도 주고
+                popup.setFocusable(true);
+                //팝업 뷰 이외에도 터치되게 (터치시 팝업 닫기 위한 코드)
+                popup.setOutsideTouchable(true);
 
                 RelativeLayout relativeLayout = (RelativeLayout)layout.findViewById(R.id.contentLayout);
                 popup.showAtLocation(relativeLayout, Gravity.CENTER, 0, 0);
